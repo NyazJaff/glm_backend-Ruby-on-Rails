@@ -2,7 +2,7 @@
 lock "~> 3.16.0"
 
 set :application, "glm_backend"
-set :repo_url, "git@example.com:me/my_repo.git"
+set :repo_url, "git@github.com:NyazJaff/glm_backend.git"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -33,7 +33,7 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bund
 # set :local_user, -> { `git config user.name`.chomp }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 3
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
