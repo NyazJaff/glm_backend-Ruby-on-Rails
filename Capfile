@@ -42,6 +42,7 @@ require 'capistrano/passenger'
 require 'capistrano/rbenv'
 
 set :linked_files, %w{.env}
+set :linked_files, %w{config/master.key}
 set :rbenv_type, :user
 set :use_sudo, true
 set :rbenv_ruby, '3.0.0'       # Spcify your ruby version
