@@ -3,6 +3,7 @@ lock "~> 3.16.0"
 
 set :application, "glm_backend"
 set :repo_url, "git@github.com:NyazJaff/glm_backend.git"
+set :branch, ENV['BRANCH'] ? ENV['BRANCH'] : 'main'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
