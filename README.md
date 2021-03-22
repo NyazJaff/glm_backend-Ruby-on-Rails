@@ -23,7 +23,7 @@ Things you may want to cover:
   
 * Database initialization
   mysql.server restart
-
+  
 
 * How to run the test suite
 
