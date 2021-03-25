@@ -28,4 +28,4 @@ test:
   database: 'glm_backend_db_test'
 production:
   <<: *default
-  database: 'glm_backend_db_prod'
+  database: 'mosque_prayer_slots'

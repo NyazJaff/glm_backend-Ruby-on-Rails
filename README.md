@@ -30,5 +30,10 @@ Things you may want to cover:
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
+  
+  bundle exec cap production deploy # Deploy using Cap
+  sudo service nginx start          # Restart nginx
+  gem update --system               # Point bundler to latest installed
+  RAILS_ENV=production rails c      # Access rails c, might have to run 'gem install rails' if first time
 
 * ...
