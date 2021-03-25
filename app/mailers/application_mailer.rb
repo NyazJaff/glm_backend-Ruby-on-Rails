@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'up694452@myport.ac.uk'
+  default from: 'info@greenlanemasjid.org'
   layout 'mailer'
 end

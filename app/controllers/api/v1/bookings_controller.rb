@@ -17,12 +17,12 @@ class Api::V1::BookingsController < ApplicationController
     return unless validate_create
 
     list_requested_slots = save_requested_prayers
-
-    UserMaileMailer.with(
-      requested_slots: list_requested_slots, to: list_requested_slots.first.email).prayer_confirmation_email.deliver_now
-    render :json => {:status => "success"}
+    unless list_requested_slots.first.email.blank?
+      UserMaileMailer.with(
+        requested_slots: list_requested_slots, to: list_requested_slots.first.email).prayer_confirmation_email.deliver_now
+    end
+    render :json => { :status => "success" }
   end
-
 
   def show
     puts "****44"

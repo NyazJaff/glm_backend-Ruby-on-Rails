@@ -41,8 +41,7 @@ require 'capistrano/rails'
 require 'capistrano/passenger'
 require 'capistrano/rbenv'
 
-set :linked_files, %w{.env}    # on server /home/deploy/glm_backend/shared
-set :linked_files, %w{config/master.key}
+set :linked_files, %w{.env config/master.key}  # on server /home/deploy/glm_backend/shared
 set :rbenv_type, :user
 set :use_sudo, true
 set :rbenv_ruby, '3.0.0'       # Spcify your ruby version

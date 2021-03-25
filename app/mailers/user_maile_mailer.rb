@@ -2,12 +2,12 @@ require 'date'
 
 
 class UserMaileMailer < ApplicationMailer
-  default from: 'up694452@myport.ac.uk'
+  default from: 'info@greenlanemasjid.org'
 
   def prayer_confirmation_email
-    @requested_slots = params[:requested_slots]
     @to              = params[:to]
-    puts "*****to",
+    return if @to.nil?
+    @requested_slots = params[:requested_slots]
     @subject        = 'GLM, Prayer confirmation for ' + @requested_slots.first.date.strftime("%a, %d %b %Y" )
     mail(to: @to, subject: @subject)
   end
