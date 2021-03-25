@@ -31,6 +31,7 @@ class RequestedSlotsController < ApplicationController
     unless requested_slot.nil?
       requested_slot.status = ApplicationRecord.statuses[:canceled]
       requested_slot.save
+      increment_availability(requested_slot.prayer, requested_slot.gender, requested_slot.date)
     end
     render :json => { :status => 'success'}
   end
@@ -49,7 +50,17 @@ class RequestedSlotsController < ApplicationController
 
     requested_slot.status = ApplicationRecord.statuses[:canceled]
     requested_slot.save
+    increment_availability(requested_slot.prayer, requested_slot.gender, requested_slot.date)
   end
+
+  def increment_availability (prayer, gender, date )
+    prayer_config = PrayerConfig.find_by(
+      prayer: prayer,
+      gender: gender
+    )
+    prayer_config.increment_availability(date: date)
+  end
+
 
   def strong_params
     params.permit(:id, :deviceId)

@@ -25,14 +25,9 @@ class Api::V1::BookingsController < ApplicationController
   end
 
   def show
-    puts "****44"
     render :json => {
       :id => params[:id],
     }
-  end
-
-  def destroy
-    puts "******7777", Base64.encode64(params[:id])
   end
 
   def get_available_slots

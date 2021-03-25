@@ -2,7 +2,7 @@ require 'date'
 
 
 class UserMaileMailer < ApplicationMailer
-  default from: 'info@greenlanemasjid.org'
+  default from: "Green Lane Masjid <info@greenlanemasjid.org>"
 
   def prayer_confirmation_email
     @to              = params[:to]
