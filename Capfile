@@ -41,7 +41,7 @@ require 'capistrano/rails'
 require 'capistrano/passenger'
 require 'capistrano/rbenv'
 
-set :linked_files, %w{.env}
+set :linked_files, %w{.env}    # on server /home/deploy/glm_backend/shared
 set :linked_files, %w{config/master.key}
 set :rbenv_type, :user
 set :use_sudo, true

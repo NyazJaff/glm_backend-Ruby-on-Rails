@@ -1,3 +1,5 @@
+require 'encryption_service'
+
 class Api::V1::BookingsController < ApplicationController
   include Api::V1::BookingsHelper
 
@@ -8,6 +10,29 @@ class Api::V1::BookingsController < ApplicationController
     slots = get_available_slots
 
     render :json => {status: :success, slots: slots || []}
+  end
+
+  def create
+    @user = User.find_or_create_by(phone_id: strong_params[:deviceId])
+    return unless validate_create
+
+    list_requested_slots = save_requested_prayers
+
+    UserMaileMailer.with(
+      requested_slots: list_requested_slots, to: list_requested_slots.first.email).prayer_confirmation_email.deliver_now
+    render :json => {:status => "success"}
+  end
+
+
+  def show
+    puts "****44"
+    render :json => {
+      :id => params[:id],
+    }
+  end
+
+  def destroy
+    puts "******7777", Base64.encode64(params[:id])
   end
 
   def get_available_slots
@@ -50,20 +75,18 @@ class Api::V1::BookingsController < ApplicationController
     end
   end
 
-  def create
-    @user = User.find_or_create_by(phone_id: strong_params[:deviceId])
-    return if validate_create == false
-
+  def save_requested_prayers
+    list_requested_slots = []
     strong_params[:prayers].each do |prayer|
       ActiveRecord::Base.transaction do
-        @user.requested_slots.create(
+        requested_slot = @user.requested_slots.create(
           gender: User.genders[strong_params[:gender]],
           prayer: prayer,
           date:   strong_params[:date],
           email:  strong_params[:email],
           status: ApplicationRecord.statuses[:active]
         )
-
+        list_requested_slots << requested_slot
         prayer_config = PrayerConfig.find_by(
           prayer: prayer,
           gender: User.genders[strong_params[:gender]]
@@ -71,9 +94,8 @@ class Api::V1::BookingsController < ApplicationController
         prayer_config.decrement_availability(date: strong_params[:date])
       end
     end
-    render :json => {:status => "success"}
+    list_requested_slots
   end
-
 
   def validate_create
     error = {:status => "error", message: ''}

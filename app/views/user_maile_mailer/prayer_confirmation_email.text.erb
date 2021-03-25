@@ -1,0 +1,15 @@
+Confirmation email for prayer slots
+===================================
+You recently booked few prayer slots and this email contains the details. Please keep this
+email and you might be asked to show it to member of the masjid at the time of entering.
+
+<%= @requested_slots.first.date.strftime("%a, %d %b %Y")%>
+
+
+------------------------------------
+<% @requested_slots.each do |slot| %>
+
+  Prayer: <%= PrayerConfig.where(prayer: slot.prayer).first.label %>
+  Cancel link: <%= cancel_prayer_view_url(Base64.encode64(slot.id.to_s)) %>
+<% end %>
+-----------------------------------

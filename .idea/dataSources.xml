@@ -15,5 +15,12 @@
       <jdbc-url>jdbc:mysql://151.106.32.72:3306/greenlan_greenla2_newglm</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="mosque_prayer_slots@18.135.31.158" uuid="b37e54d2-61da-47cb-9b46-f1cddd90f8a3">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://18.135.31.158:3306/mosque_prayer_slots</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
