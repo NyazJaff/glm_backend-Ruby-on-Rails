@@ -41,6 +41,7 @@ class Api::V1::BookingsController < ApplicationController
                   .where("slot_availabilities.date": date)
                   .where("prayer_configs.gender": gender)
                   .order('prayer_configs.group')
+                  .order('prayer_configs.id')
                   .group_by{|e| [e.group]}
                   .values
 
@@ -75,11 +76,17 @@ class Api::V1::BookingsController < ApplicationController
     strong_params[:prayers].each do |prayer|
       ActiveRecord::Base.transaction do
         requested_slot = @user.requested_slots.create(
-          gender: User.genders[strong_params[:gender]],
-          prayer: prayer,
-          date:   strong_params[:date],
-          email:  strong_params[:email],
-          status: ApplicationRecord.statuses[:active]
+          gender:         User.genders[strong_params[:gender]],
+          prayer:         prayer,
+          date:           strong_params[:date],
+          full_name:      strong_params[:full_name],
+          phone_number:   strong_params[:phone_number],
+          email:          strong_params[:email],
+          address_line_1: strong_params[:address_line_1],
+          address_line_2: strong_params[:address_line_2],
+          city:           strong_params[:city],
+          postcode:       strong_params[:postcode],
+          status:         ApplicationRecord.statuses[:active]
         )
         list_requested_slots << requested_slot
         prayer_config = PrayerConfig.find_by(
@@ -119,6 +126,18 @@ class Api::V1::BookingsController < ApplicationController
   end
 
   def strong_params
-    params.require(:booking).permit(:gender, :date, :email, :deviceId, :prayers => []);
+    params.require(:booking).permit(
+      :gender,
+      :date,
+      :full_name,
+      :phone_number,
+      :email,
+      :address_line_1,
+      :address_line_2,
+      :city,
+      :postcode,
+      :deviceId,
+      :prayers => []
+    );
   end
 end
