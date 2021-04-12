@@ -37,6 +37,10 @@ class PrayerConfig < ApplicationRecord
 
   def decrement_availability(date:)
     slot_track = self.slot_availabilities.find_by(date: date)
+    if slot_track.available_slots <= 0
+      raise self.label + ' is already full, please select a different date or prayer.'
+    end
+
     slot_track.available_slots = slot_track.available_slots - 1
     slot_track.save
   end

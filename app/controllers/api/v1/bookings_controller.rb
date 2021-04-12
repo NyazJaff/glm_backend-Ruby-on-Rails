@@ -22,6 +22,8 @@ class Api::V1::BookingsController < ApplicationController
         requested_slots: list_requested_slots, to: list_requested_slots.first.email).prayer_confirmation_email.deliver_now
     end
     render :json => { :status => "success" }
+  rescue => e
+    render :json => { :status => "error", message: e }
   end
 
   def show
@@ -60,6 +62,7 @@ class Api::V1::BookingsController < ApplicationController
 
           availability = slot.slot_availabilities.new(available_slots: slot.limit, date: date)
           if slot.start_date.nil? || slot_config_in_range?(slot, date)
+            next if (slot.prayer.include? 'jummah') && date.wday != 5 # 5 = Friday
             begin
               availability.save
             rescue ActiveRecord::RecordNotUnique => e
