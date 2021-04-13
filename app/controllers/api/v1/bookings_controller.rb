@@ -59,7 +59,7 @@ class Api::V1::BookingsController < ApplicationController
   def setup_slot_availability
     date_list = booking_days_range
     date_list.each_with_index do |date, index|
-      next if index+1 == date_list.length && Time.now.hour < 12
+      # next if index+1 == date_list.length && Time.now.hour >= 12
       PrayerConfig.prayer_slots.each do |slot|
         unless SlotAvailability.where(prayer_config_id: slot.id, date: date).exists?
 
