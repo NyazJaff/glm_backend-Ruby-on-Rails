@@ -2,7 +2,7 @@ module Api::V1::BookingsHelper
 
   def booking_days_range
     days = []
-    num_days = 3
+    num_days = 4
     num_days.times do |index|
       days << Date.today + index
     end
