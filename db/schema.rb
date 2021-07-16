@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_12_232416) do
+ActiveRecord::Schema.define(version: 2021_07_16_084843) do
 
   create_table "prayer_configs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "gender", limit: 20, null: false
     t.string "prayer", limit: 20, null: false
-    t.string "label", limit: 20, null: false
+    t.string "label", limit: 100, null: false
     t.integer "limit", null: false
     t.integer "status", limit: 2, null: false
     t.integer "group", limit: 2, default: 3, null: false
