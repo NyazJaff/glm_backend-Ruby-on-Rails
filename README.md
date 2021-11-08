@@ -12,7 +12,13 @@ Things you may want to cover:
 
 * Configuration
   https://medium.com/@devontem/solved-cant-connect-to-local-mysql-server-through-socket-tmp-mysql-sock-2-f52c9c546f7
-  
+
+To connect run:
+mysql -uroot
+
+To start mysql:
+brew services start mysql
+
 * Database creation
   Add to .env
   DB_HOST=localhost
